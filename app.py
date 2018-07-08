@@ -12,7 +12,7 @@ def index():
 def api_post():
     if not request.json:
         abort(400)
-    return jsonify({'response': request.json}), 200
+    return jsonify({'response': request.json})
 
 @app.route('/api/uploadtest', methods=['POST'])
 def test_image():
@@ -27,6 +27,12 @@ def test_image():
         return jsonify(classifier.getImageScore())
 
     return jsonify({ 'error': 'Unsupported file extension' }), 400
+
+@app.route('/api/dogbreeds', methods=['GET'])
+def getDogBreeds():
+    classifier = ImageClassifier(None)
+    return jsonify(classifier.getImageClasses())
+
 
 if __name__ == '__main__':
     app.run(debug=True)

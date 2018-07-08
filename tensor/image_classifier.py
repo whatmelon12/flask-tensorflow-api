@@ -12,13 +12,12 @@ class ImageClassifier:
         self.TEST_IMAGES_DIR = os.getcwd() + "/tensor/test_images"
 
     def getImageScore(self):                
-        breeds = []
+
+        breeds = self.getImageClasses()
 
         # for currentLine in tf.gfile.GFile(self.RETRAINED_LABELS_TXT_FILE_LOC):
         #     breed = currentLine.rstrip()
         #     breeds.append(breed)
-        with open(self.RETRAINED_LABELS_TXT_FILE_LOC, 'r') as fbreed:
-            breeds = [ x.strip('\n').split(' ', 1) for x in fbreed.readlines() ]
             
         with tf.gfile.FastGFile(self.RETRAINED_GRAPH_PB_FILE_LOC, 'rb') as retrainedGraphFile:
             graphDef = tf.GraphDef()
@@ -35,3 +34,9 @@ class ImageClassifier:
             result = [ { 'breed': { 'id': breeds[index][0], 'name': breeds[index][1] }, 'score': scores[0][index] * 100 } for index in breedIndexArray ]
             
             return result
+    
+    def getImageClasses(self):
+        breeds = []
+        with open(self.RETRAINED_LABELS_TXT_FILE_LOC, 'r') as fbreed:
+            breeds = [ x.strip('\n').split(' ', 1) for x in fbreed.readlines() ]
+        return breeds
