@@ -1,8 +1,10 @@
 from flask import Flask, request, abort, jsonify
+from flask_cors import CORS
 from utilities.util import Util
 from tensor.image_classifier import ImageClassifier
 
 app = Flask(__name__)
+CORS(app)
 
 @app.route('/')
 def index():
