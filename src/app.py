@@ -8,16 +8,17 @@ CORS(app)
 
 @app.route('/')
 def index():
-    return "Hello World Flask API!"
-
-@app.route('/api/test/post', methods=['POST'])
-def api_post():
-    if not request.json:
-        abort(400)
-    return jsonify({'response': request.json})
+    """
+    '/' Index route of Flask API.
+    """
+    return "Hello World TensorFlow Flask API - Dog Breeds Classifier! v1.0"
 
 @app.route('/api/uploadtest', methods=['POST'])
 def test_image():
+    """
+    '/api/uploadtest' POST endpoint to send image and Multipart data form request content
+    for the TensorFlow graph to analize.
+    """
     if 'image' not in request.files:
         return jsonify({'error': 'Image file not sent'}), 400
 
@@ -32,6 +33,10 @@ def test_image():
 
 @app.route('/api/dogbreeds', methods=['GET'])
 def getDogBreeds():
+    """
+    '/api/dogbreeds' GET endpoint to obtain a list of all recognizable dog breeds by the TensorFlow 
+    agent.
+    """
     classifier = ImageClassifier(None)
     return jsonify(classifier.getImageClasses())
 

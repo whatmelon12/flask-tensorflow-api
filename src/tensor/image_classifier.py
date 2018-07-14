@@ -4,14 +4,21 @@ import numpy as np
 import cv2
 
 class ImageClassifier:
+    """
+    Class to interface with the TensorFlow library and load the trained graph.
+    """
 
     def __init__(self, image):
         self.image = image
-        self.RETRAINED_LABELS_TXT_FILE_LOC = os.getcwd() + "/tensor/" + "retrained_labels.txt"
-        self.RETRAINED_GRAPH_PB_FILE_LOC = os.getcwd() + "/tensor/" + "retrained_graph.pb"
-        self.TEST_IMAGES_DIR = os.getcwd() + "/tensor/test_images"
+        self.RETRAINED_LABELS_TXT_FILE_LOC = os.getcwd() + "/src/tensor/" + "retrained_labels.txt"
+        self.RETRAINED_GRAPH_PB_FILE_LOC = os.getcwd() + "/src/tensor/" + "retrained_graph.pb"
+        self.TEST_IMAGES_DIR = os.getcwd() + "/src/tensor/test_images"
 
-    def getImageScore(self):                
+    def getImageScore(self):     
+        """
+        Loads specified image buffer in constructor to be analized by TensorFlow graph.
+        @returns array of objects containing classified breed data and score.
+        """           
 
         breeds = self.getImageClasses()
 
@@ -36,6 +43,9 @@ class ImageClassifier:
             return result
     
     def getImageClasses(self):
+        """
+        Obtains an array of objects containing all breeds handled by the TensorFlow graph and its id.
+        """
         breeds = []
         with open(self.RETRAINED_LABELS_TXT_FILE_LOC, 'r') as fbreed:
             breeds = [ x.strip('\n').split(' ', 1) for x in fbreed.readlines() ]
