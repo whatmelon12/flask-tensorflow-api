@@ -33,7 +33,7 @@
 <td>api/uploadtest</td>
 <td>POST</td>
 <td>Multipart Form (image)</td>
-<td>Analisys result</td>
+<td>Analysis result</td>
 </tr>
 </tbody>
 </table>
