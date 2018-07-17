@@ -5,6 +5,10 @@ import tensorflow as tf
 import numpy as np
 import cv2
 
+'''
+Testing script that reads test images from local file.
+'''
+
 # module-level variables ##############################################################################################
 RETRAINED_LABELS_TXT_FILE_LOC = os.getcwd() + "/tensor/" + "retrained_labels.txt"
 RETRAINED_GRAPH_PB_FILE_LOC = os.getcwd() + "/tensor/" + "retrained_graph.pb"
@@ -15,6 +19,9 @@ SCALAR_BLUE = (255.0, 0.0, 0.0)
 
 #######################################################################################################################
 def main():
+    '''
+    Executes the tesing logic.
+    '''
     print("starting program . . .")
 
     if not checkIfNecessaryPathsAndFilesExist():
@@ -140,6 +147,9 @@ def main():
 
 #######################################################################################################################
 def checkIfNecessaryPathsAndFilesExist():
+    '''
+    Verifies if necessary directories exist.
+    '''
     if not os.path.exists(TEST_IMAGES_DIR):
         print('')
         print('ERROR: TEST_IMAGES_DIR "' + TEST_IMAGES_DIR + '" does not seem to exist')
@@ -163,6 +173,9 @@ def checkIfNecessaryPathsAndFilesExist():
 
 #######################################################################################################################
 def writeResultOnImage(openCVImage, resultText):
+    '''
+    Creates a window to output the result information on top of the analized image.
+    '''
     # ToDo: this function may take some further fine-tuning to show the text well given any possible image size
 
     imageHeight, imageWidth, sceneNumChannels = openCVImage.shape
